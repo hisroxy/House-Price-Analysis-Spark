@@ -1,0 +1,63 @@
+<div class="content__list--item" data-el="listItem" data-bu_desc="省心租" data-house_code="SZ1777999319211704320" data-brand_code="200306004772" data-ad_code="0" data-bid_version="" data-c_type="2" data-position="0" data-total="51197" data-fb_expo_id="1064319833300594688" data-t="default" data-strategy_id="" data-click_position="0" data-ad_type="0" data-distribution_type="203500000001" data-event_id="80250" data-event_action="click_position=0&amp;housedel_id=SZ1777999319211704320" data-event_position="click_position" data-event_send="no" data-rank_score="-1" data-operation_score="0" exposure-event_name="Module_View" exposure-event_uicode="rentalList" exposure-event_id="80249" exposure-event_action="housedel_id=SZ1777999319211704320&amp;house_type=省心租" exposure="true">
+    <a class="content__list--item--aside" target="_blank" href="/zufang/SZ1777999319211704320.html" title="整租·佳华领悦广场 3室2厅 南">
+        <img alt="整租·佳华领悦广场 3室2厅 南_佳华领悦广场租房" src="https://image1.ljcdn.com/lease-image/house/7ee98208a887b4d072d099c2b8f3d13a.jpeg.250x182.jpg" data-src="https://image1.ljcdn.com/lease-image/house/7ee98208a887b4d072d099c2b8f3d13a.jpeg.250x182.jpg" class=" lazyloaded" data-expand="400">
+        <!-- 是否展示vr图片 -->
+                    <i class="vr-logo"></i>
+                <!-- 是否展示省心租图片 -->
+                    <i class="sxz-logo"></i>
+
+        <!-- 广告标签 -->
+            </a>
+    <div class="content__list--item--main">
+      <p class="content__list--item--title">
+        <a class="twoline" target="_blank" href="/zufang/SZ1777999319211704320.html">
+          整租·佳华领悦广场 3室2厅 南        </a>
+                      </p>
+      <p class="content__list--item--des">
+                <a target="_blank" href="/zufang/pingshanqu/">坪山区</a>-<a href="/zufang/pingshan/" target="_blank">坪山</a>-<a title="佳华领悦广场" href="/zufang/c2420052532576413/" target="_blank">佳华领悦广场</a>
+        <i>/</i>
+        95.80㎡
+        <i>/</i>南        <i>/</i>
+          3室2厅2卫        <span class="hide">
+          <i>/</i>
+          低楼层                        （41层）
+                  </span>
+      </p>
+      <p class="content__list--item--bottom oneline">
+            <i class="content__item__tag--ziying_sxz">自营</i>
+            <i class="content__item__tag--is_new">新上</i>
+            <i class="content__item__tag--decoration">精装</i>
+            <i class="content__item__tag--deposit_1_pay_1">押一付一</i>
+            <i class="content__item__tag--two_bathroom">双卫生间</i>
+            <i class="content__item__tag--is_key">随时看房</i>
+            </p>
+      <p class="content__list--item--brand oneline">
+                  <span class="brand">
+            贝壳优选          </span>
+                          <span class="content__list--item--time oneline">1天前维护</span>
+              </p>
+            <span class="content__list--item-price"><em>3900</em> 元/月</span>
+    </div>
+
+</div>
+
+爬取的维度:
+1.方式(不限/整租/合租)
+2楼盘名称例:整租·佳华领悦广场
+3.户型例:3室2厅2卫
+4.城市地区:
+例如:坪山区
+5.区内地段:
+例如:坪山
+6.面积:
+例如:95.80㎡
+7.朝向:
+例:南
+8.标签
+例如:新上、近地铁、精装、自营
+9.价格
+例如:3900元/月
+11.楼层例如:低楼层                        （41层）
+12封面图
+例如: <img alt="整租·佳华领悦广场 3室2厅 南_佳华领悦广场租房" src="https://image1.ljcdn.com/lease-image/house/7ee98208a887b4d072d099c2b8f3d13a.jpeg.250x182.jpg" data-src="https://image1.ljcdn.com/lease-image/house/7ee98208a887b4d072d099c2b8f3d13a.jpeg.250x182.jpg" class=" lazyloaded" data-expand="400">
+13.详情链接 例如: <a class="twoline" target="_blank" href="/zufang/SZ1777999319211704320.html">
