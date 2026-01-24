@@ -1,0 +1,60 @@
+# 2026年1月24日 工作日志
+
+## 项目：房价分析系统 (House-Price-Analysis-Spark)
+
+### 工作内容概述
+今天主要完成了Django 3后端Web框架和Vue 2前端框架的搭建，按照要求实现了三个子应用(user、houses、recommend)，并在user应用中创建了5个用户数据模型。
+
+### 后端开发
+1. 创建了完整的Django项目结构
+   - 配置了settings.py、urls.py、wsgi.py等核心文件
+   - 集成了REST Framework
+
+2. 创建了三个子应用
+   - user：用户数据管理
+   - houses：房价数据和用户行为管理
+   - recommend：推荐接口管理
+
+3. 在user应用中实现了5个模型
+   - UserProfile：用户信息模型
+   - UserClickBehavior：用户点击行为模型
+   - UserDetailViewBehavior：用户查看房子详情行为模型
+   - UserFavoriteBehavior：用户收藏房屋行为模型
+   - UserCommentBehavior：用户评论房屋行为模型
+
+4. 配置了MySQL数据库连接
+   - 修改settings.py使用MySQL数据库
+   - 配置PyMySQL作为MySQL驱动
+   - 设置数据库连接参数
+
+5. 实现了各应用的API端点
+   - 设计了相应的URL路由和视图函数
+
+### 前端开发
+1. 搭建了Vue 2项目结构
+   - 配置了路由、状态管理和组件系统
+   - 集成了Element UI组件库
+
+2. 创建了可视化图表功能
+   - 集成echarts和echarts-wordcloud
+   - 创建了EchartsComponent和WordCloudComponent组件
+
+
+3. 创建了各页面视图
+   - Home：数据概览页面
+   - Houses：房价列表及分析页面
+   - Recommend：推荐房源页面
+   - User：用户中心页面
+
+### 技术要点
+- 本地数据库仅存储用户数据模型和用户行为数据模型
+- 房价原始数据从远程Hive表获取
+- 使用PyMySQL作为MySQL驱动以兼容Django
+- 前后端分离架构，通过API进行数据交互
+
+### 完成数据库迁移操作
+
+### 待办事项
+- 连接真实的数据源进行测试
+- 完善推荐算法的实现
+- 优化前后端交互逻辑
