@@ -1,0 +1,10 @@
+gz:广州
+sz:深圳
+fs:佛山
+dg:东莞
+hui:惠州
+zs:中山
+zh:珠海
+jiangmen:江门
+qy:清远
+zhanjiang:湛江
