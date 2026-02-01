@@ -8,6 +8,6 @@ module.exports = {
       }
     }
   },
-  outputDir: '../house_price_analysis/frontend/dist',
+  outputDir: '../backend/frontend/dist',
   assetsDir: 'static'
 }

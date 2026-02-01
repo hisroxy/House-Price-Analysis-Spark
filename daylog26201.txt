@@ -1,0 +1,64 @@
+DWD层数据清洗过程记录 - 2026-02-01
+
+一、清洗目标
+- 基于ODS层表 ods_house_data 创建高质量的DWD层明细表 dwd_house_data
+- 提升数据质量，为后续分析和推荐系统提供可靠数据源
+
+二、清洗步骤详解
+
+1. 数据读取阶段
+   - 从Hive表 ods_house_data 读取原始数据
+   - 使用 spark.table("ods_house_data") 获取DataFrame
+
+2. 字段清洗处理
+   ▶ 字符串字段清洗：
+     - city, method, building_name, room_type, city_district, district_area, orientation, tags, floor_type, cover_image, detail_link
+     - 使用 trim() 函数去除前后空格
+     - 确保字段值格式统一
+
+   ▶ 数值字段清洗：
+     - area（面积）字段：使用 regexp_replace(trim(col("area")), r'[^\d\.]', '') 提取数字部分，转换为 DoubleType
+     - price（价格）字段：使用 regexp_replace(trim(col("price")), r'[^\d\.]', '') 提取数字部分
+     - floor_number（楼层数）字段：使用 regexp_replace(trim(col("floor_number")), r'[^\d]', '') 提取数字部分，转换为 IntegerType
+
+3. 缺失值处理策略
+   - 关键数值字段（price, area_sqm）：过滤掉为空或0的记录（设置 is_valid_data = False）
+   - 字符串字段：用"未知"填充缺失值
+   - 图片和链接字段：用"无"填充缺失值
+   - 添加 is_valid_data 布尔字段标识数据有效性
+
+4. 去重处理
+   - 基于业务关键字段组合去重：building_name + room_type + city_district + area_sqm + price
+   - 避免同一房源重复记录影响分析结果
+   - 使用 dropDuplicates() 方法实现
+
+5. 数据质量验证
+   - 清洗前数据量统计：ods_df.count()
+   - 清洗后数据量统计：dwd_df.count()
+   - 计算数据清洗率：(清洗后/清洗前) × 100%
+
+三、表结构设计
+- 表名：dwd_house_data
+- 存储格式：ORC（列式存储，高效压缩）
+- 压缩算法：SNAPPY（平衡压缩比和解压速度）
+- 字段类型优化：数值字段使用 DoubleType/IntegerType，字符串使用 StringType
+
+四、执行流程
+1. 创建SparkSession并启用Hive支持
+2. 调用 create_dwd_table() 函数执行清洗逻辑
+3. 创建DWD层表结构
+4. 将清洗后的数据写入表中
+5. 关闭Spark会话
+
+五、预期效果
+- 数据质量提升：去除无效、重复、格式不规范的数据
+- 查询性能优化：ORC格式+SNAPPY压缩提高查询效率
+- 为后续DWS层聚合分析和推荐系统提供高质量数据基础
+
+六、注意事项
+- 确保Hive Metastore服务正常运行
+- 检查HDFS存储空间是否充足
+- 清洗规则可根据实际业务需求进一步调整
+- 建议定期监控数据清洗率，及时发现数据质量问题
+
+执行状态：待执行

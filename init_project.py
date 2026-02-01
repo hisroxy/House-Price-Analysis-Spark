@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from user.models import UserProfile
 
 # 设置Django环境
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'house_price_analysis.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
 django.setup()
 
 def init_project():
