@@ -12,6 +12,7 @@
       <el-menu-item index="0" @click="goToDashboard">
         <span class="logo">🏠 房价分析系统</span>
       </el-menu-item>
+
       <el-menu-item index="1">首页</el-menu-item>
       <el-menu-item index="2">房源管理</el-menu-item>
       <el-menu-item index="3">智能推荐</el-menu-item>
@@ -32,6 +33,7 @@ export default {
     goToDashboard() {
       this.$router.push('/')
     },
+
     handleSelect(key) {
       switch(key) {
         case '1':
