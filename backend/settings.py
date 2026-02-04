@@ -147,3 +147,12 @@ CORS_ALLOW_CREDENTIALS = True
 
 # 允许所有来源（开发环境）
 CORS_ALLOW_ALL_ORIGINS = True
+
+# Hive Dashboard配置
+HIVE_DASHBOARD = {
+    'host': '192.168.96.130',
+    'port': 10000,
+    'username': 'root',
+    'database': 'default',
+    'auth': 'NOSASL'
+}

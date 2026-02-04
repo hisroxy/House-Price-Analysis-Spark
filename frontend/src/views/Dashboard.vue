@@ -137,16 +137,34 @@ export default {
         const response = await this.$http.get('/api/dashboard/data/')
         if (response.data.success) {
           this.dashboardData = response.data.data
+        } else {
+          // Hive查询失败，显示错误信息
+          console.error('Hive数据查询失败:', response.data.message)
+          this.dashboardData = {}
+          this.showError('数据加载失败，请检查Hive服务是否正常运行')
         }
       } catch (error) {
         console.error('加载数据失败:', error)
-        // 使用mock数据
-        this.dashboardData = this.generateMockData()
+        this.dashboardData = {}
+        this.showError('网络请求失败，请检查后端服务是否正常运行')
       } finally {
         this.loading = false
       }
     },
+    
+    showError(message) {
+      this.$message({
+        message: message,
+        type: 'error',
+        duration: 5000
+      })
+    },
+    
     initCharts() {
+      // 只有当有数据时才初始化图表
+      if (!this.dashboardData || Object.keys(this.dashboardData).length === 0) {
+        return
+      }
       this.initMapChart()
       this.initPriceTrendChart()
       this.initAreaChart()
@@ -293,37 +311,6 @@ export default {
     disposeCharts() {
       Object.values(this.charts).forEach(chart => chart && chart.dispose())
       this.charts = {}
-    },
-    generateMockData() {
-      return {
-        overview: { total_houses: 15678, avg_price: 7800.50, max_price: 25000, min_price: 1200 },
-        price_trend: [
-          { city: '深圳', avg_price: 8500, house_count: 4200, max_price: 25000 },
-          { city: '广州', avg_price: 6800, house_count: 3800, max_price: 20000 },
-          { city: '东莞', avg_price: 4200, house_count: 2900, max_price: 15000 }
-        ],
-        area_distribution: [
-          { name: '南山区', value: 1850 }, { name: '福田区', value: 1620 },
-          { name: '宝安区', value: 1430 }, { name: '龙岗区', value: 1280 }
-        ],
-        room_type_stats: [
-          { room_type: '3室2厅', count: 5200, avg_price: 7200 },
-          { room_type: '2室1厅', count: 4800, avg_price: 5800 },
-          { room_type: '1室1厅', count: 2100, avg_price: 3200 }
-        ],
-        orientation_stats: [
-          { name: '南', value: 4200 }, { name: '南北', value: 3800 },
-          { name: '东', value: 2100 }, { name: '西', value: 1800 }
-        ],
-        price_range_distribution: [
-          { range: '0-3000元', count: 1200 }, { range: '3000-5000元', count: 3800 },
-          { range: '5000-8000元', count: 5200 }, { range: '8000-12000元', count: 3100 }
-        ],
-        tags_wordcloud: [
-          { name: '近地铁', value: 6800 }, { name: '精装', value: 5200 },
-          { name: '随时看房', value: 4800 }, { name: '新上', value: 3900 }
-        ]
-      }
     }
   }
 }

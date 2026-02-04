@@ -217,7 +217,7 @@ DATABASES = {
 ### HDFS配置 (spark/upload_hdfs.py)
 ```python
 HDFS_HOST = "http://node1:9870"
-HDFS_TARGET_PATH = "/houseData/house.csv"
+HDFS_TARGET_PATH = "/houseData/house2.csv"
 HDFS_USER = "root"
 ```
 

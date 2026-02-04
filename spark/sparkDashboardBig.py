@@ -150,9 +150,7 @@ def analyze_price_range_distribution(spark: SparkSession) -> None:
         
         # 保存到Hive表
         price_range_df = spark.createDataFrame(price_range_data, ["price_range", "count"])
-        price_range_df.write.mode("overwrite").saveAsTable("sparkDashboardBig_price_range_distribution")
-        price_range_df = spark.createDataFrame(price_range_data, ["price_range", "count"])
-        price_range_df.write.mode("overwrite").saveAsTable("sparkDashboardBig_price_range_distribution")
+        price_range_df.write.mode("overwrite").saveAsTable("sparkdashboardbig_price_range_distribution")
     except Exception as e:
         print(f"价格区间分析失败: {e}")
 
