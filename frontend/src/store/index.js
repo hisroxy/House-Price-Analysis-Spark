@@ -5,20 +5,21 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: null,
-    houses: [],
-    recommendations: []
+    userStats: {},                 // 用户统计数据
+    recommendationPreview: [],     // 推荐预览数据
+    dashboardData: {}             // 仪表板完整数据
   },
   mutations: {
-    SET_USER(state, user) {
-      state.user = user
+    SET_USER_STATS(state, stats) {
+      state.userStats = stats
     },
-    SET_HOUSES(state, houses) {
-      state.houses = houses
+    SET_RECOMMENDATION_PREVIEW(state, recommendations) {
+      state.recommendationPreview = recommendations
     },
-    SET_RECOMMENDATIONS(state, recommendations) {
-      state.recommendations = recommendations
+    SET_DASHBOARD_DATA(state, data) {
+      state.dashboardData = data
     }
+
   },
   actions: {
   },

@@ -42,18 +42,26 @@ House-Price-Analysis-Spark/
 │   └── wsgi.py            # WSGI部署
 ├── frontend/               # Vue前端
 │   ├── src/
+│   │   ├── main.js        # 注册Element UI,挂载Router、Store，渲染App.vue。
+│   │   ├── App.vue        # 布局根组件，引用HeaderBar并渲染路由出口。
+│   │   ├── components/
+│   │   │   ├── HeaderBar.vue   #顶部导航，展示产品名称与菜单占位。        
 │   │   ├── router/        # 路由配置
+│   │   │   ├── index.js   #使用history模式,目前/指向Dashboard    
 │   │   ├── store/         # 状态管理
+│   │   │   ├── index.js   #Vuex 状态管理, 内 userStats、recommendationPreview, fetchDashboardbata 填静态数据。    
 │   │   └── views/         # 页面组件
-│   └── package.json       # 前端依赖
+│   │       ├── Dashboard.vue   # 使用Element UI的el-row/el-card渲染指标卡与推荐列表，
+│   ├── package.json       # 前端依赖，Vue CLI 4 项目描述, 依赖 vue@2.6、vue-router、vuex、element-ui、echarts,脚本含serve/build/lint。
+│   └──vue.config.js        #可配置方向代理（目前保持默认配置）
 ├── user/                   # 用户管理应用
 │   ├── models.py          # 用户数据模型
 │   ├── views.py           # 用户视图
 │   └── urls.py            # 用户路由
-├── houses/                 # 房价数据应用
+├── houses/                 # 房价数据应用（目前为占位app、后续用于对接房价数据）
 │   ├── views.py           # 房价视图
 │   └── urls.py            # 房价路由
-├── recommend/              # 推荐系统应用
+├── recommend/              # 推荐系统应用（目前为占位app、后续用于对接房屋推荐）
 │   ├── views.py           # 推荐视图
 │   └── urls.py            # 推荐路由
 ├── spider/                 # 数据爬虫
