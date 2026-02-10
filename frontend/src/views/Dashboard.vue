@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard dark-theme">
-    <!-- 顶部概览卡片 -->
+    <!-- 顶部概览卡片：显示房源总数、平均价格、最高价格、最低价格 -->
     <el-row :gutter="20" class="stats-row">
       <el-col :span="6" v-for="(stat, index) in overviewStats" :key="index">
         <el-card class="stat-card">
@@ -12,18 +12,20 @@
       </el-col>
     </el-row>
     
-    <!-- 第一行：地图和表格 -->
+    <!-- 第一行：地图和数据表格 -->
     <el-row :gutter="20" class="chart-row">
       <el-col :span="16">
+        <!-- 地理分布地图卡片 -->
         <el-card class="chart-card map-card">
           <div slot="header" class="chart-header">广东省房源地理分布</div>
           <div ref="mapChart" class="chart-container"></div>
         </el-card>
       </el-col>
       <el-col :span="8">
+        <!-- 详细数据表格卡片 -->
         <el-card class="chart-card table-card">
           <div slot="header" class="chart-header">详细数据表格</div>
-          <el-table :data="tableData" height="500" stripe class="dark-table">
+          <el-table :data="tableData" height="400" stripe class="dark-table">
             <el-table-column prop="city" label="城市" width="100"></el-table-column>
             <el-table-column prop="avg_price" label="均价" width="120">
               <template slot-scope="scope">¥{{ scope.row.avg_price }}</template>
@@ -42,18 +44,21 @@
     <!-- 第二行：区域分布、户型统计和均价排行 -->
     <el-row :gutter="20" class="chart-row">
       <el-col :span="8">
+        <!-- 区域房源分布饼图 -->
         <el-card class="chart-card mini-card">
           <div slot="header" class="chart-header">区域房源分布</div>
           <div ref="areaChart" class="chart-container"></div>
         </el-card>
       </el-col>
       <el-col :span="8">
+        <!-- 户型统计分析柱状图 -->
         <el-card class="chart-card mini-card">
           <div slot="header" class="chart-header">户型统计分析</div>
           <div ref="roomTypeChart" class="chart-container"></div>
         </el-card>
       </el-col>
       <el-col :span="8">
+        <!-- 城市均价排行柱状图 -->
         <el-card class="chart-card mini-card">
           <div slot="header" class="chart-header">城市均价排行</div>
           <div ref="priceTrendChart" class="chart-container"></div>
@@ -64,18 +69,21 @@
     <!-- 第三行：朝向分布、价格区间和词云图 -->
     <el-row :gutter="20" class="chart-row">
       <el-col :span="8">
+        <!-- 房源朝向分布饼图 -->
         <el-card class="chart-card mini-card">
           <div slot="header" class="chart-header">房源朝向分布</div>
           <div ref="orientationChart" class="chart-container"></div>
         </el-card>
       </el-col>
       <el-col :span="8">
+        <!-- 价格区间分布条形图 -->
         <el-card class="chart-card mini-card">
           <div slot="header" class="chart-header">价格区间分布</div>
           <div ref="priceRangeChart" class="chart-container"></div>
         </el-card>
       </el-col>
       <el-col :span="8">
+        <!-- 房源标签词云图 -->
         <el-card class="chart-card mini-card">
           <div slot="header" class="chart-header">房源标签词云</div>
           <div ref="wordCloudChart" class="chart-container"></div>
@@ -85,7 +93,7 @@
     
 
     
-    <!-- 加载提示 -->
+    <!-- 加载提示：数据加载时显示遮罩层 -->
     <div v-if="loading" class="loading-overlay">
       <div class="loading-spinner"></div>
       <p>数据加载中...</p>
@@ -102,12 +110,13 @@ export default {
   name: 'Dashboard',
   data() {
     return {
-      loading: false,
-      dashboardData: {},
-      charts: {}
+      loading: false,  // 控制加载状态显示
+      dashboardData: {},  // 存储从后端获取的dashboard数据
+      charts: {}  // 存储ECharts实例
     }
   },
   computed: {
+    // 计算顶部统计卡片数据
     overviewStats() {
       const data = this.dashboardData.overview || {}
       return [
@@ -117,6 +126,7 @@ export default {
         { label: '最低价格', value: `¥${(data.min_price || 0).toLocaleString()}`, color: '#F56C6C' }
       ]
     },
+    // 计算表格数据来源
     tableData() {
       return this.dashboardData.price_trend || []
     }
@@ -317,42 +327,49 @@ export default {
 </script>
 
 <style scoped>
+/* 整体页面样式 */
 .dark-theme {
   background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
   color: #e0e0e0;
-  min-height: 100vh;
-  padding: 40px;
+  min-height: 90vh;
+  padding: 50px;  /* 两侧留白40px */
   font-family: 'Consolas', 'Monaco', monospace;
 }
 
+/* 顶部统计卡片行样式 */
 .stats-row {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
+/* 顶部统计卡片样式 */
 .stat-card {
   background: rgba(30, 30, 46, 0.8);
   border: 1px solid rgba(79, 172, 254, 0.3);
   border-radius: 4px;
   backdrop-filter: blur(20px);
   box-shadow: 0 0 20px rgba(79, 172, 254, 0.2);
-  height: 120px;
+  height: 100px;  /* 符合规范：顶部统计卡100px */
   transition: all 0.3s ease;
 }
 
+/* 统计卡片悬停效果 */
 .stat-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 0 30px rgba(79, 172, 254, 0.4);
   border-color: rgba(79, 172, 254, 0.6);
 }
 
+/* 统计卡片内边距 */
 .stat-card ::v-deep .el-card__body {
   padding: 20px;
 }
 
+/* 统计内容居中 */
 .stat-content {
   text-align: center;
 }
 
+/* 统计数字样式 */
 .stat-number {
   font-size: 28px;
   font-weight: bold;
@@ -360,15 +377,18 @@ export default {
   text-shadow: 0 0 10px currentColor;
 }
 
+/* 统计标签样式 */
 .stat-label {
   font-size: 14px;
   color: #aaa;
 }
 
+/* 图表行样式 */
 .chart-row {
   margin-bottom: 20px;
 }
 
+/* 图表卡片通用样式 */
 .chart-card {
   background: rgba(30, 30, 46, 0.8);
   border: 1px solid rgba(79, 172, 254, 0.3);
@@ -378,37 +398,41 @@ export default {
   transition: all 0.3s ease;
 }
 
+/* 图表卡片悬停效果 */
 .chart-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 0 30px rgba(79, 172, 254, 0.4);
   border-color: rgba(79, 172, 254, 0.6);
 }
 
+/* 图表卡片头部样式 */
 .chart-card ::v-deep .el-card__header {
   background: rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: 15px 20px;
 }
 
+/* 图表标题样式 */
 .chart-header {
   color: #00f2fe;
   font-size: 18px;
   font-weight: bold;
 }
 
+/* 图表容器通用样式 */
 .chart-container {
   width: 100%;
-  height: 250px;
+  height: 250px;  /* 小型分析卡250px */
 }
 
 /* 地图卡片特殊样式 */
 .map-card .chart-container {
-  height: 400px;
+  height: 400px;  /* 地理分布卡400px */
 }
 
 /* 表格卡片特殊样式 */
 .table-card .chart-container {
-  height: 400px;
+  height: 200px;  /* 表格卡200px */
 }
 
 .dark-table ::v-deep .el-table {
