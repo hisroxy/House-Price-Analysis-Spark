@@ -100,11 +100,11 @@ def dashboard_data(request):
                     "max_price": float(row["max_price"])
                 })
             
-            # 处理区域分布数据
-            for row in area_dist_data:
+            # 处理地理房源分布数据（来自price_trend表的house_count字段）
+            for row in price_trend_data:
                 formatted_data["area_distribution"].append({
-                    "name": row["city_district"],
-                    "value": int(row["count"])
+                    "name": row["city"],
+                    "value": int(row["house_count"])
                 })
             
             # 处理户型统计数据
@@ -186,12 +186,14 @@ def dashboard_summary(request):
                     "house_count": int(row["house_count"])
                 })
             
-            # 处理区域分布（前3个区域）
-            for i, row in enumerate(area_dist_data[:3]):
+            # 处理区域分布（前3个城市，基于房源数量）
+            # 按房源数量排序，取前3个
+            sorted_cities = sorted(price_trend_data, key=lambda x: int(x["house_count"]), reverse=True)[:3]
+            for i, row in enumerate(sorted_cities):
                 summary_data["top_areas"].append({
                     "rank": i+1,
-                    "area": row["city_district"],
-                    "count": int(row["count"])
+                    "area": row["city"],
+                    "count": int(row["house_count"])
                 })
             
             # 处理户型统计（前3种户型）

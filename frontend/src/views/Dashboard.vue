@@ -12,66 +12,18 @@
       </el-col>
     </el-row>
     
-    <!-- 第一行：地图和价格趋势 -->
+    <!-- 第一行：地图和表格 -->
     <el-row :gutter="20" class="chart-row">
-      <el-col :span="12">
-        <el-card class="chart-card">
+      <el-col :span="16">
+        <el-card class="chart-card map-card">
           <div slot="header" class="chart-header">广东省房源地理分布</div>
           <div ref="mapChart" class="chart-container"></div>
         </el-card>
       </el-col>
-      <el-col :span="12">
-        <el-card class="chart-card">
-          <div slot="header" class="chart-header">城市均价排行</div>
-          <div ref="priceTrendChart" class="chart-container"></div>
-        </el-card>
-      </el-col>
-    </el-row>
-    
-    <!-- 第二行：区域分布和户型统计 -->
-    <el-row :gutter="20" class="chart-row">
-      <el-col :span="12">
-        <el-card class="chart-card">
-          <div slot="header" class="chart-header">区域房源分布</div>
-          <div ref="areaChart" class="chart-container"></div>
-        </el-card>
-      </el-col>
-      <el-col :span="12">
-        <el-card class="chart-card">
-          <div slot="header" class="chart-header">户型统计分析</div>
-          <div ref="roomTypeChart" class="chart-container"></div>
-        </el-card>
-      </el-col>
-    </el-row>
-    
-    <!-- 第三行：朝向分布和价格区间 -->
-    <el-row :gutter="20" class="chart-row">
-      <el-col :span="12">
-        <el-card class="chart-card">
-          <div slot="header" class="chart-header">房源朝向分布</div>
-          <div ref="orientationChart" class="chart-container"></div>
-        </el-card>
-      </el-col>
-      <el-col :span="12">
-        <el-card class="chart-card">
-          <div slot="header" class="chart-header">价格区间分布</div>
-          <div ref="priceRangeChart" class="chart-container"></div>
-        </el-card>
-      </el-col>
-    </el-row>
-    
-    <!-- 第四行：词云图和数据表格 -->
-    <el-row :gutter="20" class="chart-row">
-      <el-col :span="12">
-        <el-card class="chart-card">
-          <div slot="header" class="chart-header">房源标签词云</div>
-          <div ref="wordCloudChart" class="chart-container"></div>
-        </el-card>
-      </el-col>
-      <el-col :span="12">
-        <el-card class="chart-card">
+      <el-col :span="8">
+        <el-card class="chart-card table-card">
           <div slot="header" class="chart-header">详细数据表格</div>
-          <el-table :data="tableData" height="350" stripe class="dark-table">
+          <el-table :data="tableData" height="500" stripe class="dark-table">
             <el-table-column prop="city" label="城市" width="100"></el-table-column>
             <el-table-column prop="avg_price" label="均价" width="120">
               <template slot-scope="scope">¥{{ scope.row.avg_price }}</template>
@@ -84,6 +36,54 @@
         </el-card>
       </el-col>
     </el-row>
+    
+
+    
+    <!-- 第二行：区域分布、户型统计和均价排行 -->
+    <el-row :gutter="20" class="chart-row">
+      <el-col :span="8">
+        <el-card class="chart-card mini-card">
+          <div slot="header" class="chart-header">区域房源分布</div>
+          <div ref="areaChart" class="chart-container"></div>
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card class="chart-card mini-card">
+          <div slot="header" class="chart-header">户型统计分析</div>
+          <div ref="roomTypeChart" class="chart-container"></div>
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card class="chart-card mini-card">
+          <div slot="header" class="chart-header">城市均价排行</div>
+          <div ref="priceTrendChart" class="chart-container"></div>
+        </el-card>
+      </el-col>
+    </el-row>
+    
+    <!-- 第三行：朝向分布、价格区间和词云图 -->
+    <el-row :gutter="20" class="chart-row">
+      <el-col :span="8">
+        <el-card class="chart-card mini-card">
+          <div slot="header" class="chart-header">房源朝向分布</div>
+          <div ref="orientationChart" class="chart-container"></div>
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card class="chart-card mini-card">
+          <div slot="header" class="chart-header">价格区间分布</div>
+          <div ref="priceRangeChart" class="chart-container"></div>
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card class="chart-card mini-card">
+          <div slot="header" class="chart-header">房源标签词云</div>
+          <div ref="wordCloudChart" class="chart-container"></div>
+        </el-card>
+      </el-col>
+    </el-row>
+    
+
     
     <!-- 加载提示 -->
     <div v-if="loading" class="loading-overlay">
@@ -318,10 +318,11 @@ export default {
 
 <style scoped>
 .dark-theme {
-  background: #0a1929;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
   color: #e0e0e0;
   min-height: 100vh;
-  padding: 20px;
+  padding: 40px;
+  font-family: 'Consolas', 'Monaco', monospace;
 }
 
 .stats-row {
@@ -329,10 +330,19 @@ export default {
 }
 
 .stat-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  backdrop-filter: blur(10px);
+  background: rgba(30, 30, 46, 0.8);
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  border-radius: 4px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 20px rgba(79, 172, 254, 0.2);
+  height: 120px;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(79, 172, 254, 0.4);
+  border-color: rgba(79, 172, 254, 0.6);
 }
 
 .stat-card ::v-deep .el-card__body {
@@ -360,10 +370,18 @@ export default {
 }
 
 .chart-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  backdrop-filter: blur(10px);
+  background: rgba(30, 30, 46, 0.8);
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  border-radius: 4px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 20px rgba(79, 172, 254, 0.2);
+  transition: all 0.3s ease;
+}
+
+.chart-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(79, 172, 254, 0.4);
+  border-color: rgba(79, 172, 254, 0.6);
 }
 
 .chart-card ::v-deep .el-card__header {
@@ -380,7 +398,17 @@ export default {
 
 .chart-container {
   width: 100%;
-  height: 350px;
+  height: 250px;
+}
+
+/* 地图卡片特殊样式 */
+.map-card .chart-container {
+  height: 400px;
+}
+
+/* 表格卡片特殊样式 */
+.table-card .chart-container {
+  height: 400px;
 }
 
 .dark-table ::v-deep .el-table {
