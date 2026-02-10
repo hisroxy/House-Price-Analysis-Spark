@@ -77,7 +77,7 @@ export default {
   },
   computed: {
     userAvatar() {
-      return this.userInfo.avatar || '/default-avatar.png'
+      return this.userInfo.avatar || 'https://ss2.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1659552792,3869332496&fm=253&gp=0.jpg'
     }
   },
   mounted() {

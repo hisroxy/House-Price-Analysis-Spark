@@ -31,11 +31,6 @@ const routes = [
         path: 'recommend',
         name: 'Recommend',
         component: () => import('@/views/Recommend.vue')
-      },
-      {
-        path: 'user',
-        name: 'User',
-        component: () => import('@/views/User.vue')
       }
     ]
   },
@@ -58,6 +53,17 @@ const routes = [
         path: '',
         name: 'Register',
         component: () => import('@/views/Register.vue')
+      }
+    ]
+  },
+  {
+    path: '/user',
+    component: AuthLayout,
+    children: [
+      {
+        path: '',
+        name: 'User',
+        component: () => import('@/views/User.vue')
       }
     ]
   }

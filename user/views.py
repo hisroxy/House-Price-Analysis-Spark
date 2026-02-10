@@ -234,3 +234,81 @@ def get_user_info(request):
             'success': False,
             'message': f'获取用户信息失败: {str(e)}'
         }, status=500)
+
+@login_required
+@require_http_methods(["PUT"])
+def update_user_info(request):
+    """
+    更新用户信息API
+    """
+    try:
+        data = json.loads(request.body)
+        user = request.user
+        
+        # 更新User表字段
+        if 'email' in data:
+            user.email = data['email']
+            user.save()
+        
+        # 更新UserProfile表字段
+        try:
+            profile = user.profile
+        except UserProfile.DoesNotExist:
+            profile = UserProfile.objects.create(user=user)
+        
+        # 更新可选字段
+        update_fields = []
+        if 'phone' in data:
+            profile.phone = data['phone']
+            update_fields.append('phone')
+        if 'gender' in data:
+            profile.gender = data['gender']
+            update_fields.append('gender')
+        if 'nickname' in data:
+            profile.nickname = data['nickname']
+            update_fields.append('nickname')
+        if 'city' in data:
+            profile.city = data['city']
+            update_fields.append('city')
+        if 'avatar' in data:
+            profile.avatar = data['avatar']
+            update_fields.append('avatar')
+        if 'birth_date' in data and data['birth_date']:
+            try:
+                profile.birth_date = datetime.strptime(data['birth_date'], '%Y-%m-%d').date()
+                update_fields.append('birth_date')
+            except ValueError:
+                pass
+        
+        if update_fields:
+            profile.save(update_fields=update_fields)
+        
+        # 返回更新后的用户信息
+        updated_user_info = {
+            'user_id': user.id,
+            'username': user.username,
+            'email': user.email,
+            'nickname': profile.nickname or user.username,
+            'phone': profile.phone or '',
+            'gender': profile.gender or '未知',
+            'city': profile.city or '',
+            'avatar': profile.avatar or '',
+            'birth_date': profile.birth_date.strftime('%Y-%m-%d') if profile.birth_date else ''
+        }
+        
+        return JsonResponse({
+            'success': True,
+            'message': '用户信息更新成功',
+            'data': updated_user_info
+        })
+        
+    except json.JSONDecodeError:
+        return JsonResponse({
+            'success': False,
+            'message': '请求数据格式错误'
+        }, status=400)
+    except Exception as e:
+        return JsonResponse({
+            'success': False,
+            'message': f'更新用户信息失败: {str(e)}'
+        }, status=500)
