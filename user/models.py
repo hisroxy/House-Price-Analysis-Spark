@@ -9,6 +9,10 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     phone = models.CharField(max_length=20, blank=True, null=True)
     avatar = models.URLField(blank=True, null=True)
+    nickname = models.CharField(max_length=50, blank=True, null=True)
+    gender = models.CharField(max_length=10, choices=[('男', '男'), ('女', '女'), ('未知', '未知')], default='未知')
+    city = models.CharField(max_length=50, blank=True, null=True)
+    birth_date = models.DateField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
