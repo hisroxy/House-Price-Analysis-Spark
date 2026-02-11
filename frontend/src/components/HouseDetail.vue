@@ -5,6 +5,8 @@
     width="80%"
     class="house-detail-dialog"
     @close="$emit('close')"
+    :modal-append-to-body="false"
+    :append-to-body="true"
   >
     <div class="house-detail-container">
       <el-scrollbar style="height: 600px;">
@@ -140,6 +142,8 @@
         :visible.sync="showCommentDialog"
         width="500px"
         @close="resetCommentForm"
+        :modal-append-to-body="false"
+        :append-to-body="true"
       >
         <el-form :model="commentForm" :rules="commentRules" ref="commentForm" label-width="80px">
           <el-form-item label="评分" prop="rating">
@@ -501,6 +505,28 @@ export default {
 
 .dialog-footer {
   text-align: right;
+}
+
+/* 对话框样式 */
+.house-detail-dialog >>> .el-dialog {
+  border-radius: 8px;
+}
+
+.house-detail-dialog >>> .el-dialog__header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 8px 8px 0 0;
+}
+
+.house-detail-dialog >>> .el-dialog__title {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.house-detail-dialog >>> .el-dialog__body {
+  padding: 0;
 }
 
 /* 滚动条样式 */

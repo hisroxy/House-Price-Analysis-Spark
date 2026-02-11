@@ -67,7 +67,6 @@ export default {
   name: 'HeaderBar',
   data() {
     return {
-      activeIndex: '1',
       isAuthenticated: false,
       userInfo: {
         nickname: '',
@@ -174,7 +173,7 @@ export default {
         '/recommend': '3',
         '/user': '4'
       }
-      this.activeIndex = routeMap[to.path] || '1'
+      this.activeIndex = routeMap[to.path] || '0'
     }
   }
 }
