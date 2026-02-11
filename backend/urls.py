@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/dashboard/', include('dashboard.urls')),
     path('api/user/', include('user.urls')),
+    path('api/houses/', include('houses.urls')),
     path('', RedirectView.as_view(url='/api/dashboard/data/', permanent=False)),
 ]
