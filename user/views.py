@@ -235,6 +235,7 @@ def get_user_info(request):
             'message': f'获取用户信息失败: {str(e)}'
         }, status=500)
 
+@csrf_exempt
 @login_required
 @require_http_methods(["PUT"])
 def update_user_info(request):
