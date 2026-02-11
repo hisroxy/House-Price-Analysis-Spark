@@ -8,7 +8,14 @@ from django.views.decorators.http import require_http_methods
 from .models import UserProfile, UserClickBehavior, UserDetailViewBehavior, UserFavoriteBehavior, UserCommentBehavior
 import json
 import re
+import logging
 from datetime import datetime
+from user.models import UserFavoriteBehavior, UserDetailViewBehavior, UserCommentBehavior, UserClickBehavior
+
+logger = logging.getLogger(__name__)
+
+# 导入Hive配置
+from backend.db_config import HIVE_CONFIG
 
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -313,3 +320,133 @@ def update_user_info(request):
             'success': False,
             'message': f'更新用户信息失败: {str(e)}'
         }, status=500)
+
+@login_required
+@csrf_exempt
+def get_user_favorites(request):
+    """获取用户收藏列表API"""
+    if request.method == 'GET':
+        try:
+            favorites = UserFavoriteBehavior.objects.filter(user=request.user).order_by('-favorited_at')
+            
+            favorite_data = []
+            for fav in favorites:
+                favorite_data.append({
+                    'id': fav.id,
+                    'house_id': fav.house_id,
+                    'favorited_at': fav.favorited_at.strftime('%Y-%m-%d %H:%M:%S'),
+                    'is_active': fav.is_active
+                })
+            
+            return JsonResponse({
+                'success': True,
+                'data': favorite_data,
+                'message': '收藏列表获取成功'
+            })
+        except Exception as e:
+            logger.error(f"获取用户收藏失败: {e}")
+            return JsonResponse({
+                'success': False,
+                'error': str(e),
+                'message': '服务器内部错误'
+            }, status=500)
+    
+    return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+@login_required
+@csrf_exempt
+def get_user_comments(request):
+    """获取用户评论列表API"""
+    if request.method == 'GET':
+        try:
+            comments = UserCommentBehavior.objects.filter(user=request.user).order_by('-commented_at')
+            
+            comment_data = []
+            for comment in comments:
+                comment_data.append({
+                    'id': comment.id,
+                    'house_id': comment.house_id,
+                    'comment': comment.comment,
+                    'rating': comment.rating,
+                    'commented_at': comment.commented_at.strftime('%Y-%m-%d %H:%M:%S')
+                })
+            
+            return JsonResponse({
+                'success': True,
+                'data': comment_data,
+                'message': '评论列表获取成功'
+            })
+        except Exception as e:
+            logger.error(f"获取用户评论失败: {e}")
+            return JsonResponse({
+                'success': False,
+                'error': str(e),
+                'message': '服务器内部错误'
+            }, status=500)
+    
+    return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+@login_required
+@csrf_exempt
+def get_user_browse_history(request):
+    """获取用户浏览记录API"""
+    if request.method == 'GET':
+        try:
+            histories = UserDetailViewBehavior.objects.filter(user=request.user).order_by('-viewed_at')
+            
+            history_data = []
+            for history in histories:
+                history_data.append({
+                    'id': history.id,
+                    'house_id': history.house_id,
+                    'viewed_at': history.viewed_at.strftime('%Y-%m-%d %H:%M:%S'),
+                    'duration': history.duration,
+                    'session_id': history.session_id
+                })
+            
+            return JsonResponse({
+                'success': True,
+                'data': history_data,
+                'message': '浏览记录获取成功'
+            })
+        except Exception as e:
+            logger.error(f"获取浏览记录失败: {e}")
+            return JsonResponse({
+                'success': False,
+                'error': str(e),
+                'message': '服务器内部错误'
+            }, status=500)
+    
+    return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+@login_required
+@csrf_exempt
+def get_user_click_behaviors(request):
+    """获取用户点击行为API"""
+    if request.method == 'GET':
+        try:
+            behaviors = UserClickBehavior.objects.filter(user=request.user).order_by('-clicked_at')
+            
+            behavior_data = []
+            for behavior in behaviors:
+                behavior_data.append({
+                    'id': behavior.id,
+                    'house_id': behavior.house_id,
+                    'clicked_at': behavior.clicked_at.strftime('%Y-%m-%d %H:%M:%S'),
+                    'session_id': behavior.session_id
+                })
+            
+            return JsonResponse({
+                'success': True,
+                'data': behavior_data,
+                'message': '点击行为获取成功'
+            })
+        except Exception as e:
+            logger.error(f"获取点击行为失败: {e}")
+            return JsonResponse({
+                'success': False,
+                'error': str(e),
+                'message': '服务器内部错误'
+            }, status=500)
+    
+    return JsonResponse({'error': 'Method not allowed'}, status=405)

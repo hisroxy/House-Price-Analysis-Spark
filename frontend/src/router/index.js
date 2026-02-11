@@ -31,6 +31,11 @@ const routes = [
         path: 'recommend',
         name: 'Recommend',
         component: () => import('@/views/Recommend.vue')
+      },
+      {
+        path: 'user-center',
+        name: 'UserCenter',
+        component: () => import('@/views/UserCenter.vue')
       }
     ]
   },

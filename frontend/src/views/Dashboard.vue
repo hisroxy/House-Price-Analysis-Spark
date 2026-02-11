@@ -165,8 +165,7 @@ export default {
     showError(message) {
       this.$message({
         message: message,
-        type: 'error',
-        duration: 5000
+        type: 'error'
       })
     },
     

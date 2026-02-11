@@ -1,0 +1,228 @@
+/* 全局样式优化 */
+
+/* Element UI 组件样式覆盖 */
+.el-menu {
+  border: none !important;
+}
+
+.el-menu-item {
+  font-weight: 500 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.el-menu-item:focus, .el-menu-item:hover {
+  outline: none !important;
+  background-color: transparent !important;
+}
+
+/* 按钮样式增强 */
+.el-button {
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.el-button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 卡片样式优化 */
+.el-card {
+  border-radius: 15px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid #f0f2f5 !important;
+  transition: all 0.3s ease !important;
+}
+
+.el-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 输入框样式优化 */
+.el-input__inner {
+  border-radius: 10px !important;
+  border: 2px solid #e1e8ff !important;
+  transition: all 0.3s ease !important;
+}
+
+.el-input__inner:focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+}
+
+/* 下拉菜单样式优化 */
+.el-dropdown-menu {
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+  border: none !important;
+  padding: 8px 0 !important;
+}
+
+.el-dropdown-menu__item {
+  padding: 12px 20px !important;
+  transition: all 0.2s ease !important;
+}
+
+.el-dropdown-menu__item:hover {
+  background: linear-gradient(135deg, #f0f4ff 0%, #e6eeff 100%) !important;
+  color: #667eea !important;
+}
+
+/* 对话框样式优化 */
+.el-dialog {
+  border-radius: 15px !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2) !important;
+}
+
+.el-dialog__header {
+  padding: 20px 30px 15px !important;
+  border-bottom: 1px solid #f0f2f5 !important;
+}
+
+.el-dialog__body {
+  padding: 25px 30px !important;
+}
+
+.el-dialog__footer {
+  padding: 15px 30px 25px !important;
+  border-top: 1px solid #f0f2f5 !important;
+}
+
+/* 表格样式优化 */
+.el-table {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+.el-table th {
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%) !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+}
+
+.el-table__row:hover {
+  background: rgba(102, 126, 234, 0.05) !important;
+}
+
+/* 分页样式优化 */
+.el-pagination {
+  margin-top: 20px !important;
+}
+
+.el-pager li {
+  border-radius: 8px !important;
+  margin: 0 3px !important;
+}
+
+.el-pager li.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
+}
+
+/* 消息提示样式优化 */
+.el-message {
+  border-radius: 12px !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+  border: none !important;
+}
+
+/* 加载动画优化 */
+.el-loading-mask {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(5px) !important;
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* 响应式工具类 */
+.hidden-xs {
+  display: block !important;
+}
+
+.hidden-sm {
+  display: block !important;
+}
+
+.hidden-md {
+  display: block !important;
+}
+
+.hidden-lg {
+  display: block !important;
+}
+
+@media (max-width: 768px) {
+  .hidden-xs {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .hidden-sm {
+    display: none !important;
+  }
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+  .hidden-md {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1201px) {
+  .hidden-lg {
+    display: none !important;
+  }
+}

@@ -5,9 +5,31 @@ import store from './store'
 import ElementUI from 'element-ui'
 import axios from 'axios'
 import 'element-ui/lib/theme-chalk/index.css'
+import './assets/styles.css'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+
+// 统一设置Element UI消息提示显示时间
+const originalMessage = ElementUI.Message
+Vue.prototype.$message = function(options) {
+  if (typeof options === 'string') {
+    options = { message: options }
+  }
+  options.duration = options.duration || 1000
+  return originalMessage(options)
+}
+
+// 保持$message的各种方法
+Object.keys(originalMessage).forEach(method => {
+  Vue.prototype.$message[method] = function(options) {
+    if (typeof options === 'string') {
+      options = { message: options }
+    }
+    options.duration = options.duration || 1500
+    return originalMessage[method](options)
+  }
+})
 
 // 配置axios
 Vue.prototype.$http = axios
